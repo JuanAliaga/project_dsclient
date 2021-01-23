@@ -45,16 +45,16 @@ public class ClientService {
 		return new ClientDTO(entity);
 	}
 	
-	
+	@Transactional
 	public ClientDTO update(Long id, ClientDTO dto) {
 		try {
-			Client entity = repository.getOne(id);
-			copyDtoToEntity(dto,entity);
-			entity = repository.save(entity);
-			return new ClientDTO(entity);
-		}
-		catch(EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id not found" + id);
+		Client entity = repository.getOne(id);
+		copyDtoToEntity(dto,entity);
+		entity = repository.save(entity);
+		return new ClientDTO(entity);
+	}
+	catch(EntityNotFoundException e){
+		throw new ResourceNotFoundException("Id not found " + id);
 		}
 	}
 	
@@ -71,7 +71,6 @@ public class ClientService {
 	}
 	
 	private void copyDtoToEntity(ClientDTO dto, Client entity) {
-		entity.setId(dto.getId());
 		entity.setName(dto.getName());
 		entity.setcpf(dto.getcpf());
 		entity.setIncome(dto.getIncome());

@@ -41,7 +41,7 @@ public class ClientResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<ClientDTO> findById(@PathVariable Long id){
 		ClientDTO dto = service.findById(id);
 		
@@ -58,9 +58,9 @@ public class ClientResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
-		dto = service.update(id,dto);
-		
+	public ResponseEntity<ClientDTO> update(@PathVariable Long id,@RequestBody ClientDTO dto){
+		dto = service.update(id, dto);
+				
 		return ResponseEntity.ok().body(dto);
 	}
 	
